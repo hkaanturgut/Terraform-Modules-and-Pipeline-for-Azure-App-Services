@@ -74,41 +74,22 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-#     - name: Check az cli
-#       run: az version
         
-#     - name: az Login
-#       env:
-#         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-#         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-#         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-     
-#       run: |
-#         az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" --tenant "$ARM_TENANT_ID"
-#         az account list
-        
-    - name: login
+    - name: az Login
       env:
         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      run: 
-        export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
-        export ARM_CLIENT_ID=$ARM_CLIENT_ID
-        export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
-        export ARM_TENANT_ID=$ARM_TENANT_ID
-        export ARM_LOCATION=canadacentral        
+
+      run: |
+        az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" --tenant "$ARM_TENANT_ID"
+        az account list
+
         
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      env:
-
-        RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
-        STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-        CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-      run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
+      run: terraform init 
 
 
     # Generates an execution plan for Terraform
