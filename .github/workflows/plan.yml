@@ -103,7 +103,13 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -var-file="dev.tfvars" -no-color
+      run: 
+        export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
+        export ARM_CLIENT_ID=$ARM_CLIENT_ID
+        export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
+        export ARM_TENANT_ID=$ARM_TENANT_ID
+        export ARM_LOCATION=canadacentral
+        terraform plan -var-file="dev.tfvars" -no-color
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
