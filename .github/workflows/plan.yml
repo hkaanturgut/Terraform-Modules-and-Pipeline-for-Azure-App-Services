@@ -77,15 +77,15 @@ jobs:
     - name: Check az cli
       run: az version
         
-    - name: az Login
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+#     - name: az Login
+#       env:
+#         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+#         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
      
-      run: |
-        az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" --tenant "$ARM_TENANT_ID"
-        az account list
+#       run: |
+#         az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" --tenant "$ARM_TENANT_ID"
+#         az account list
         
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
