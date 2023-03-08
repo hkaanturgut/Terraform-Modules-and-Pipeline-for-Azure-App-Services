@@ -3,7 +3,7 @@ rg_name= "App-Services-RG"
 location= "canadacentral"
 
 // Values for App Service Plan
-service_plan_name= "APP-PLAN-KAAN"
+service_plan_name= "APP-PLAN-KAANT"
 sku_name= "B1"
 os_type= "Linux"
 
